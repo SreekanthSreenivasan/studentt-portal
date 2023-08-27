@@ -1,0 +1,29 @@
+<div>
+  <mat-form-field>
+    <mat-label>Search By Section</mat-label>
+    <mat-select
+      [(ngModel)]="selectedSection"
+      (valueChange)="sectionFilteredBy($event)"
+    >
+      <mat-option [value]="'KG'"> KG </mat-option>
+      <mat-option [value]="'Primary'"> Primary </mat-option>
+      <mat-option [value]="'Secondary'"> Secondary </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div *ngIf="enableClassFilter">
+  <mat-form-field>
+    <mat-label>Search By Class</mat-label>
+    <mat-select
+      [(ngModel)]="selectedClass"
+      (valueChange)="classFilteredBy($event)"
+    >
+      <mat-option *ngFor="let class of classes" [value]="class">{{
+        class
+      }}</mat-option>
+      <!-- <mat-option [value]="'LKG'"> LKG </mat-option>
+      <mat-option [value]="'Primary'"> Primary </mat-option>
+      <mat-option [value]="'Secondary'"> Secondary </mat-option> -->
+    </mat-select>
+  </mat-form-field>
+</div>

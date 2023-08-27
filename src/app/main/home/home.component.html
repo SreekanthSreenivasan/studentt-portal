@@ -1,0 +1,60 @@
+<!--  -->
+
+<div>
+  <!-- <label>Show Primary:</label>
+  <input type="checkbox" [(ngModel)]="showPrimary" (change)="filterData()" />
+
+  <label>Show Secondary:</label>
+  <input type="checkbox" [(ngModel)]="showSecondary" (change)="filterData()" />
+  -->
+  <app-filter
+    (filterByClass)="filterByClass($event)"
+    (filterBySection)="filterBySection($event)"
+  ></app-filter>
+  <button mat-raised-button color="warn" (click)="addEditStudent('add')">
+    Add new Student
+  </button>
+</div>
+
+<table *ngIf="details$ | async as data">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Section</th>
+      <!-- <th>Age</th> -->
+      <th>Class</th>
+      <th>Action</th>
+      <th></th>
+      <!-- Add more headers as needed -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of data" (click)="navigateToDetail(item.id)">
+      <td>{{ item.name }}</td>
+      <td>{{ item.section }}</td>
+      <!-- <td>{{ item?.year }}</td> -->
+      <td>{{ item?.class }}</td>
+      <td>
+        <button
+          mat-button
+          color="primary"
+          (click)="$event.stopPropagation(); addEditStudent('edit', item)"
+        >
+          edit
+        </button>
+        <button
+          mat-button
+          color="accent"
+          (click)="$event.stopPropagation(); deleteStudent(item)"
+        >
+          delete
+        </button>
+      </td>
+
+      <!-- Display other properties as needed -->
+    </tr>
+  </tbody>
+  <ng-container *ngIf="data.length === 0">
+    <p>No students Found</p>
+  </ng-container>
+</table>

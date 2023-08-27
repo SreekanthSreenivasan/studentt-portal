@@ -1,0 +1,61 @@
+<div class="form-container">
+  <form class="example-form" [formGroup]="formGroup">
+    <mat-form-field class="example-full-width">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" placeholder="Name" />
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="description" placeholder="Description" />
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <!-- <input matInput formControlName="section" placeholder="Section" /> -->
+      <mat-label>Select Section</mat-label>
+      <mat-select formControlName="section" name="section">
+        <mat-option [value]="'KG'">KG </mat-option>
+        <mat-option [value]="'Primary'">Primary </mat-option>
+        <mat-option [value]="'Secondary'">Secondary </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" *ngIf="formGroup.value.section">
+      <!-- <input matInput formControlName="section" placeholder="Section" /> -->
+      <mat-label>Select Class</mat-label>
+      <ng-container *ngIf="formGroup.value.section === 'KG'">
+        <mat-select formControlName="class" name="class">
+          <!-- <mat-option [value]="'PKG'"> Pre-KG </mat-option> -->
+          <mat-option [value]="'LKG'"> LKG</mat-option>
+          <mat-option [value]="'UKG'"> UKG</mat-option>
+        </mat-select>
+      </ng-container>
+      <ng-container *ngIf="formGroup.value.section === 'Primary'">
+        <mat-select formControlName="class" name="class">
+          <!-- <mat-option [value]="'KG'"> KG </mat-option> -->
+          <mat-option [value]="'1'"> 1 </mat-option>
+          <mat-option [value]="'2'">2 </mat-option>
+          <mat-option [value]="'3'">3 </mat-option>
+          <mat-option [value]="'4'">4 </mat-option>
+          <mat-option [value]="'5'">5 </mat-option>
+        </mat-select>
+      </ng-container>
+
+      <ng-container *ngIf="formGroup.value.section === 'Secondary'">
+        <mat-select formControlName="class" name="class">
+          <mat-option [value]="'6'">6 </mat-option>
+          <mat-option [value]="'7'">7 </mat-option>
+          <mat-option [value]="'8'">8 </mat-option>
+          <mat-option [value]="'9'">9 </mat-option>
+          <mat-option [value]="'10'">10 </mat-option>
+        </mat-select>
+      </ng-container>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="formGroup.invalid"
+      (click)="submitForm()"
+    >
+      Submit
+    </button>
+  </form>
+</div>
